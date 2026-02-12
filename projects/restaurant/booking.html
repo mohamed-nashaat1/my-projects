@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table | Gourmet Haven</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Gourmet<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="booking.html" class="active">Book a Table</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" style="height: 50vh;">
+        <div class="hero-content">
+            <h1>Book Your Table</h1>
+            <p>Reserve your spot for an unforgettable dining experience.</p>
+        </div>
+    </header>
+
+    <!-- Booking Form Section -->
+    <section class="section">
+        <div class="container">
+            <form id="bookingForm" class="booking-form">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="name" required placeholder="Your Full Name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="phone" required placeholder="01xxxxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label>Date & Time</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="date" id="date" required>
+                        <input type="time" id="time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Guests</label>
+                    <input type="number" id="guests" min="1" max="10" required placeholder="Number of guests">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Confirm Reservation</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>Gourmet.</h3>
+                <p>123 Culinary Ave, Food City</p>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Gourmet Haven. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

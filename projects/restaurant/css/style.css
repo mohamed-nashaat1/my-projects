@@ -1,0 +1,259 @@
+/* --- Variables & Reset --- */
+:root {
+    --primary-color: #cda45e; /* Gold */
+    --bg-dark: #1a1a1a;       /* Dark Grey */
+    --bg-darker: #0c0b09;     /* Blackish */
+    --text-light: #ffffff;
+    --text-gray: #aaaaaa;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+    --transition: all 0.3s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* --- Typography --- */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--text-light);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+}
+
+/* --- Layout Utilities --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section { padding: 4rem 0; }
+.bg-dark { background-color: var(--bg-darker); }
+.text-center { text-align: center; margin-top: 2rem; }
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    padding: 10px 30px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    color: var(--text-light);
+    font-weight: bold;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-primary { background-color: var(--primary-color); color: #000; }
+.btn-primary:hover { background-color: transparent; color: var(--primary-color); }
+.btn-secondary:hover { background-color: var(--primary-color); color: #000; }
+
+/* --- Navbar --- */
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    transition: var(--transition);
+}
+
+#navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(205, 164, 94, 0.2);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: var(--text-light);
+}
+.logo span { color: var(--primary-color); }
+
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+    font-size: 1rem;
+    transition: var(--transition);
+}
+.nav-links a:hover, .nav-links a.active { color: var(--primary-color); }
+
+.hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1514362545857-3bc16549766b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: -80px;
+}
+
+.hero h1 { font-size: 4rem; margin-bottom: 1rem; }
+.hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+
+/* --- Menu Grid & Cards --- */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.menu-card {
+    background: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.menu-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+.menu-card img { width: 100%; height: 250px; object-fit: cover; }
+.card-content { padding: 1.5rem; }
+.card-content h3 { margin-bottom: 0.5rem; }
+.price { display: block; margin-top: 1rem; color: var(--primary-color); font-weight: bold; font-size: 1.2rem; }
+
+/* --- Booking Form --- */
+.booking-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #222;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; color: var(--primary-color); }
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 4px;
+}
+.form-group input:focus { outline: none; border-color: var(--primary-color); }
+
+/* --- Footer --- */
+footer { background: #000; padding: 3rem 0; margin-top: auto; border-top: 1px solid #333; }
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.social-links a { margin-right: 15px; font-size: 1.2rem; transition: var(--transition); }
+.social-links a:hover { color: var(--primary-color); }
+.copyright { text-align: center; margin-top: 2rem; border-top: 1px solid #222; padding-top: 1rem; font-size: 0.9rem; }
+
+/* --- Responsive & Mobile --- */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: -100%;
+        background: #000;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        padding: 2rem 0;
+    }
+    .nav-links.active { right: 0; }
+    .hamburger { display: block; }
+    .hero h1 { font-size: 2.5rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .footer-content { flex-direction: column; text-align: center; }
+}
+
+/* --- Animations --- */
+.fade-in { animation: fadeIn 2s ease-in; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.scroll-reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+.scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* --- Gallery Lightbox Styles --- */
+.gallery-img {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    animation: zoom 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-lightbox:hover,
+.close-lightbox:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px){
+    .lightbox-content {
+        width: 100%;
+    }
+}
