@@ -7,7 +7,7 @@ export const projects = [
     tech: ["HTML5", "CSS3", "JavaScript"],
     img: "/assets/saas.png",   
     github: "#", 
-    live: "https://nashaat-saas.netlify.app/"    
+    live: "https://nashaat-saas.vercel.app/"    
   },
   {
     title: "Professional Weather App",
@@ -15,7 +15,7 @@ export const projects = [
     tech: ["React", "OpenWeather API", "Recharts"],
     img: "/assets/weather.png",
     github: "#",
-    live: "https://nashaat-weather-pro.netlify.app/"    
+    live: "https://nashaat-weather-pro.vercel.app/"    
   },
   {
     title: "E-Commerce Website",
@@ -23,7 +23,7 @@ export const projects = [
     tech: ["React", "Context API", "LocalStorage"],
     img: "/assets/ecommerce.png",
     github: "#",
-    live: "https://nashaat-ecommerce.netlify.app/" 
+    live: "https://nashaat-ecommerce.vercel.app/" 
   },
   {
     title: "Sales Dashboard",
@@ -31,7 +31,7 @@ export const projects = [
     tech: ["React", "Chart.js", "Tailwind"],
     img: "/assets/sales.png",
     github: "#",
-    live: "https://nashaat-dashboard.netlify.app/" 
+    live: "https://nashaat-dashboard.vercel.app/" 
   },
   {
     title: "Restaurant Website",
@@ -39,7 +39,7 @@ export const projects = [
     tech: ["React", "Framer Motion", "EmailJS"],
     img: "/assets/restaurant.png",
     github: "#",
-    live: "https://nashaat-restaurant.netlify.app/" 
+    live: "https://nashaat-restaurant.vercel.app/" 
   },
 ];
 
