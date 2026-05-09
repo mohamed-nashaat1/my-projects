@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Quiz App</title>
+  <link rel="stylesheet" href="CSS/bootstrap.css">
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body class="py-4 py-md-5">
+  <main class="container app-shell">
+    <section class="quiz-box">
+      <div class="p-4 p-md-5">
+        <div id="startScreen" class="screen text-center">
+          <span class="brand-badge mb-3">Responsive Quiz App</span>
+          <h1 class="display-6 fw-bold mb-3">Test Your Basics</h1>
+          <p class="text-secondary mb-4">5 multiple-choice questions. Pick one answer per question and see your final score.</p>
+          <button id="startBtn" class="btn btn-brand text-white btn-lg px-4">Start Quiz</button>
+        </div>
+        <div id="quizScreen" class="screen hidden">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <p id="progressText" class="mb-0 fw-semibold text-secondary">Question 1 of 5</p>
+            <p id="timerText" class="mb-0 fw-semibold" aria-live="polite">Time: 15s</p>
+          </div>
+          <div class="timer-wrap mb-4">
+            <div id="timerBar" class="timer-bar"></div>
+          </div>
+          <h2 id="questionText" class="h4 fw-bold mb-4"></h2>
+          <div id="answersContainer" class="d-grid gap-3 mb-4"></div>
+          <p id="validationMsg" class="text-danger fw-semibold mb-3"></p>
+          <div class="d-flex justify-content-end">
+            <button id="nextBtn" class="btn btn-brand text-white px-4">Next</button>
+          </div>
+        </div>
+        <div id="resultScreen" class="screen hidden text-center">
+          <span class="brand-badge mb-3">Quiz Completed</span>
+          <h2 class="display-6 fw-bold mb-3">Your Score</h2>
+          <p class="mb-4 fs-4"><strong id="scoreText">0 / 5</strong></p>
+          <button id="restartBtn" class="btn btn-brand text-white btn-lg px-4">Restart Quiz</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const questions = [
+      {
+        text: "Which HTML tag is used to create a hyperlink?",
+        options: ["<a>", "<link>", "<href>", "<url>"],
+        correctAnswer: 0
+      },
+      {
+        text: "Which CSS property changes text color?",
+        options: ["font-style", "text-color", "color", "font-color"],
+        correctAnswer: 2
+      },
+      {
+        text: "Which Bootstrap class creates a responsive fixed-width container?",
+        options: [".row", ".container", ".col", ".wrapper"],
+        correctAnswer: 1
+      },
+      {
+        text: "Which JavaScript method is used to select an element by id?",
+        options: ["querySelectorAll", "getElementByClass", "getElementById", "selectId"],
+        correctAnswer: 2
+      },
+      {
+        text: "Which event is commonly used for button clicks?",
+        options: ["change", "submit", "hover", "click"],
+        correctAnswer: 3
+      }
+    ];
+
+    const startScreen = document.getElementById("startScreen");
+    const quizScreen = document.getElementById("quizScreen");
+    const resultScreen = document.getElementById("resultScreen");
+    const startBtn = document.getElementById("startBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const restartBtn = document.getElementById("restartBtn");
+    const questionText = document.getElementById("questionText");
+    const answersContainer = document.getElementById("answersContainer");
+    const progressText = document.getElementById("progressText");
+    const scoreText = document.getElementById("scoreText");
+    const validationMsg = document.getElementById("validationMsg");
+    const timerText = document.getElementById("timerText");
+    const timerBar = document.getElementById("timerBar");
+  
+    let currentQuestionIndex = 0;
+    let selectedAnswerIndex = null;
+    let score = 0;
+    let locked = false;
+    let timeLeft = 15;
+    let timerId = null;
+
+    function showScreen(screenToShow) {
+      startScreen.classList.add("hidden");
+      quizScreen.classList.add("hidden");
+      resultScreen.classList.add("hidden");
+      screenToShow.classList.remove("hidden");
+    }
+
+    function resetTimer() {
+      clearInterval(timerId);
+      timeLeft = 15;
+      timerText.textContent = "Time: 15s";
+      timerBar.style.width = "100%";
+      timerBar.style.background = "linear-gradient(90deg, #3b5bdb 0%, #7c96ff 100%)";
+
+      timerId = setInterval(() => {
+        timeLeft -= 1;
+        const percentage = (timeLeft / 15) * 100;
+        timerText.textContent = "Time: " + timeLeft + "s";
+        timerBar.style.width = percentage + "%";
+
+        if (timeLeft <= 5) {
+          timerBar.style.background = "linear-gradient(90deg, #fd7e14 0%, #ffad5a 100%)";
+        }
+
+        if (timeLeft <= 0) {
+          clearInterval(timerId);
+          if (!locked) {
+            handleAnswerSelection(-1);
+            validationMsg.textContent = "Time is up. Correct answer is highlighted.";
+          }
+        }
+      }, 1000);
+    }
+    function renderQuestion() {
+      const currentQuestion = questions[currentQuestionIndex];
+      selectedAnswerIndex = null;
+      locked = false;
+      validationMsg.textContent = "";
+
+      progressText.textContent = "Question " + (currentQuestionIndex + 1) + " of " + questions.length;
+      questionText.textContent = currentQuestion.text;
+      answersContainer.innerHTML = "";
+
+      currentQuestion.options.forEach((option, index) => {
+        const answerBtn = document.createElement("button");
+        answerBtn.className = "answer-btn";
+        answerBtn.textContent = option;
+        answerBtn.type = "button";
+        answerBtn.addEventListener("click", () => handleAnswerSelection(index));
+        answersContainer.appendChild(answerBtn);
+      });
+
+      nextBtn.textContent = currentQuestionIndex === questions.length - 1 ? "Finish" : "Next";
+      resetTimer();
+    }
+
+    function handleAnswerSelection(index) {
+      if (locked) return;
+
+      locked = true;
+      selectedAnswerIndex = index;
+      clearInterval(timerId);
+
+      const currentQuestion = questions[currentQuestionIndex];
+      const answerButtons = answersContainer.querySelectorAll(".answer-btn");
+
+      answerButtons.forEach((btn, btnIndex) => {
+        btn.disabled = true;
+
+        if (btnIndex === currentQuestion.correctAnswer) {
+          btn.classList.add("correct");
+        } else if (btnIndex === selectedAnswerIndex) {
+          btn.classList.add("wrong");
+        }
+      });
+
+      if (selectedAnswerIndex === currentQuestion.correctAnswer) {
+        score += 1;
+      }
+    }
+
+    function moveNext() {
+      if (!locked) {
+        validationMsg.textContent = "Please select an answer before moving to the next question.";
+        return;
+      }
+
+      currentQuestionIndex += 1;
+
+      if (currentQuestionIndex < questions.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      clearInterval(timerId);
+      scoreText.textContent = score + " / " + questions.length;
+      showScreen(resultScreen);
+    }
+
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      showScreen(quizScreen);
+      renderQuestion();
+    }
+
+    startBtn.addEventListener("click", startQuiz);
+    restartBtn.addEventListener("click", startQuiz);
+    nextBtn.addEventListener("click", moveNext);
+  </script>
+  <script src="js/bootstrap.bundle.js"></script>
+</body>
+</html>
