@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TaskFlow – Task Manager</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <h1>TaskFlow</h1>
+    <button id="themeBtn" class="ghost" aria-label="Toggle dark mode">Dark mode</button>
+  </header>
+
+  <section class="stats" aria-live="polite">
+    <div><strong id="statTotal">0</strong> total</div>
+    <div><strong id="statActive">0</strong> active</div>
+    <div><strong id="statDone">0</strong> done</div>
+    <div><strong id="statOverdue">0</strong> overdue</div>
+  </section>
+
+  <form id="taskForm" class="add">
+    <input id="title" type="text" placeholder="What needs to be done?" maxlength="80" required aria-label="Task title">
+    <select id="priority" aria-label="Priority">
+      <option value="low">Low</option>
+      <option value="medium" selected>Medium</option>
+      <option value="high">High</option>
+    </select>
+    <input id="due" type="date" aria-label="Due date">
+    <button type="submit" id="submitBtn">Add task</button>
+  </form>
+
+  <section class="tools">
+    <input id="search" type="search" placeholder="Search tasks" aria-label="Search tasks">
+    <div class="filters" role="group" aria-label="Filter tasks">
+      <button data-filter="all" class="chip active">All</button>
+      <button data-filter="active" class="chip">Active</button>
+      <button data-filter="done" class="chip">Done</button>
+    </div>
+    <select id="sort" aria-label="Sort tasks">
+      <option value="created">Newest first</option>
+      <option value="priority">Priority</option>
+      <option value="due">Due date</option>
+    </select>
+  </section>
+
+  <ul id="list" class="list"></ul>
+  <p id="empty" class="empty" hidden>No tasks here. Add one above.</p>
+
+  <footer class="foot">
+    <button id="clearDone" class="ghost">Clear completed</button>
+  </footer>
+</main>
+<script src="script.js"></script>
+</body>
+</html>

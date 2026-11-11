@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skycast – Weather App</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <h1>Skycast</h1>
+    <button id="unitBtn" class="ghost" aria-label="Switch temperature unit">°C</button>
+  </header>
+
+  <form id="searchForm" class="search" autocomplete="off">
+    <div class="field">
+      <input id="city" type="search" placeholder="Search for a city" aria-label="City name" required>
+      <ul id="suggestions" class="suggestions" hidden></ul>
+    </div>
+    <button type="submit" class="primary">Search</button>
+    <button type="button" id="locateBtn" class="ghost">My location</button>
+  </form>
+
+  <div id="recent" class="recent"></div>
+  <p id="status" class="status" role="status" aria-live="polite"></p>
+
+  <section id="weather" hidden>
+    <div class="now">
+      <div>
+        <h2 id="place"></h2>
+        <p id="condition" class="muted"></p>
+        <p class="temp"><span id="temp"></span></p>
+      </div>
+      <div id="icon" class="icon" aria-hidden="true"></div>
+    </div>
+    <dl class="details">
+      <div><dt>Feels like</dt><dd id="feels"></dd></div>
+      <div><dt>Humidity</dt><dd id="humidity"></dd></div>
+      <div><dt>Wind</dt><dd id="wind"></dd></div>
+    </dl>
+    <h3>Next 5 days</h3>
+    <ul id="forecast" class="forecast"></ul>
+  </section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
